@@ -1,0 +1,26 @@
+version: '3'
+volumes:
+  PGDATA:
+networks:
+  net:
+services:
+  db:
+    image: postgres:12
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: flyway
+      POSTGRES_DB: devops
+    volumes:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    networks:
+      - net
+  flyway:
+    image: flyway/flyway:8.5.0
+    volumes:
+      - ./sql:/flyway/sql
+      - ./conf:/flyway/conf
+    networks:
+      - net
