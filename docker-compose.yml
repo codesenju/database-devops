@@ -20,7 +20,7 @@ services:
   flyway:
     image: flyway/flyway:8.5.0
     volumes:
-      - ./sql:/flyway/sql
-      - ./conf:/flyway/conf
+      - ./flyway_sql:/flyway/sql
+      - ./flyway_conf:/flyway/conf
     networks:
       - net
