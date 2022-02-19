@@ -1,5 +1,8 @@
 # database-devops
-
+## start postgreSQL
+```shell
+docker-compose up -d db
+```
 ## Liquibase - Docker
 ```shell
 docker run --net liquibase_vs_flyway_net  --rm -v "$(pwd)"/liquibase_conf:/liquibase/changelog  liquibase/liquibase:4.7 --defaultsFile=./changelog/docker-liquibase.properties status
