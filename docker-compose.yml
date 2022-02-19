@@ -9,7 +9,7 @@ services:
     restart: always
     environment:
       POSTGRES_PASSWORD: password123
-      POSTGRES_USER: flyway
+      POSTGRES_USER: postgres
       POSTGRES_DB: devops
     volumes:
       - PGDATA=/var/lib/postgresql/data/pgdata
@@ -22,5 +22,11 @@ services:
     volumes:
       - ./flyway_sql:/flyway/sql
       - ./flyway_conf:/flyway/conf
+    networks:
+      - net
+  liquibase:
+    image: liquibase/liquibase:4.7
+    volumes:
+      - ./liquibase_conf:/liquibase/changelog/
     networks:
       - net
