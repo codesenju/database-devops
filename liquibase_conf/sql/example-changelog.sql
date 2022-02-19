@@ -1,26 +1,45 @@
 --liquibase formatted sql
 
 --changeset hloni:1
-CREATE TABLE Customers (
-  CustomerName varchar(255),
-  ContactName varchar(255),
-  Address varchar(255),
-  City varchar(255),
-  PostalCode varchar(255),
-  Country varchar(255),
+CREATE TABLE CUSTOMERS (
+   ID   INT              NOT NULL,
+   NAME VARCHAR (20)     NOT NULL,
+   AGE  INT              NOT NULL,
+   ADDRESS  CHAR (25) ,
+   SALARY   DECIMAL (18, 2),       
+   PRIMARY KEY (ID)
 );
---rollback DROP TABEL Customers
+--rollback DROP TABEL CCUSTOMERS;
 
 --changeset hloni:2
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (1, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (2, 'Khilan', 25, 'Delhi', 1500.00 );
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (3, 'kaushik', 23, 'Kota', 2000.00 );
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (4, 'Chaitali', 25, 'Mumbai', 6500.00 );
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (5, 'Hardik', 27, 'Bhopal', 8500.00 );
+INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+VALUES (6, 'Komal', 22, 'MP', 4500.00 );
+--rollback DELETE FROM CUSTOMERS WHERE ID=1;
+--rollback DELETE FROM CUSTOMERS WHERE ID=2;
+--rollback DELETE FROM CUSTOMERS WHERE ID=3;
+--rollback DELETE FROM CUSTOMERS WHERE ID=4;
+--rollback DELETE FROM CUSTOMERS WHERE ID=5;
+--rollback DELETE FROM CUSTOMERS WHERE ID=6;
+
+--changeset hloni:3
 ALTER TABLE
-  Customers
+  CUSTOMERS
 ADD
   Email varchar(255);
 --rollback ALTER TABLE Persons DROP COLUMN Email;
 
-  --changeset hloni:3
-INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country, Email)
-VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway','Tom@example.com');
-VALUES ('Elon', 'Elon Musk', 'Mars', 'Rocks', '2001', 'Mars','elon@example.com');
-VALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway','Tom@example.com');
---rollback DELETE FROM Customers WHERE CustomerName='Cardinal';
+--changeset john:4
+UPDATE Customers
+SET Email = 'komal@example.com'
+WHERE ID = 6;
+--rollback UPDATE Customers SET Email = '' WHERE ID = 6
